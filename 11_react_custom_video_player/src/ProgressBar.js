@@ -26,7 +26,7 @@ function ProgressBar(props) {
             window.removeEventListener('mouseup', mouseup);
             window.removeEventListener('mousemove', mousemove);
         }
-    }, [mouseDown]);
+    }, [mouseDown, setTimePercent]);
 
     return <div id="progress" onMouseDown={() => setMouseDown(true)}
                 onMouseUp={() => setMouseDown(false)}
