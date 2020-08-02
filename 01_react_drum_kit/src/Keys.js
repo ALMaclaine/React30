@@ -45,13 +45,13 @@ function Keys(props) {
     const refs = {};
     const setRef = (key, ref) => refs[key.toLowerCase()] = ref;
 
-    const downHandler = (e) => {
-        if(refs[e.key]) {
-            refs[e.key].play();
-        }
-    }
-
     useEffect(() => {
+        const downHandler = (e) => {
+            if(refs[e.key]) {
+                refs[e.key].play();
+            }
+        }
+
         window.addEventListener('keydown', downHandler);
         return () => {
             window.removeEventListener('keydown', downHandler);
