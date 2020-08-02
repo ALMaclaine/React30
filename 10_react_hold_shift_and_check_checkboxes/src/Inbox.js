@@ -28,7 +28,6 @@ function Inbox(props) {
             checked[i] = value;
             setChecked(checked);
         } else {
-            console.log("###")
             setChecked([
                 ...checked.slice(0, i),
                 !checked[i],
