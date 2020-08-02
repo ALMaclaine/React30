@@ -33,7 +33,6 @@ function Inbox(props) {
                 if(lastChecked !== lastLastChecked) {
                     const min = lastChecked < lastLastChecked ? lastChecked : lastLastChecked;
                     const max = lastChecked > lastLastChecked ? lastChecked : lastLastChecked;
-                    console.log(min, max);
                     for(let i = min; i < max; i++) {
                         refs[i].check();
                     }
@@ -42,17 +41,6 @@ function Inbox(props) {
         }
         setShiftHeld(false);
     }, [lastChecked, lastLastChecked])
-    //
-    // useEffect(() => {
-    //     const downHandler = (e) => {
-    //         console.log(e.target.key)
-    //     }
-    //
-    //     window.addEventListener('keydown', downHandler);
-    //     return () => {
-    //         window.removeEventListener('keydown', downHandler);
-    //     };
-    // }, []);
 
     let elems = [];
     for(let i = 0; i < texts.length; i++) {
