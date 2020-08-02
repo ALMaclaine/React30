@@ -1,23 +1,12 @@
-import React, {useState, useImperativeHandle, forwardRef} from 'react'
+import React from 'react'
 import './Item.css'
 
-function Item(props, impRef) {
-    const [checked, setChecked] = useState(false);
-    const { text, onClick } = props;
-
-    const check = (e) => {
-        setChecked(!checked)
-        onClick(e);
-    }
-
-    useImperativeHandle(impRef, () => ({
-        check: () => setChecked(true)
-    }));
-
+function Item(props) {
+    const { text, onClick, checked } = props;
     return <div className="item">
-                <input type="checkbox" onClick={check} onChange={() => {}} checked={checked} />
+                <input type="checkbox" onClick={onClick} onChange={() => {}} checked={checked || false} />
                 <p>{text}</p>
            </div>;
 }
 
-export default forwardRef(Item);
+export default Item;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import './Inbox.css'
 import Item from "./Item";
 
@@ -15,42 +15,31 @@ const texts = [
 ];
 
 function Inbox(props) {
-    const [lastChecked, setLastChecked] = useState(null);
-    const [lastLastChecked, setLastLastChecked] = useState(null);
-    const [shiftHeld, setShiftHeld] = useState(false);
-    const refs = [];
-    const setRef = (key, ref) => refs.push(ref);
-
-    const updateTrackers = (e, i) => {
-        setLastChecked(i);
-        setLastLastChecked(lastChecked);
-        setShiftHeld(e.shiftKey);
-    }
-
-    useEffect(() => {
-        if(shiftHeld) {
-            if(lastChecked !== null && lastLastChecked !== null) {
-                if(lastChecked !== lastLastChecked) {
-                    const min = lastChecked < lastLastChecked ? lastChecked : lastLastChecked;
-                    const max = lastChecked > lastLastChecked ? lastChecked : lastLastChecked;
-                    for(let i = min; i < max; i++) {
-                        refs[i].check();
-                    }
-                }
+    const [checked, setChecked] = useState(Array(texts.length).fill(false));
+    const [lastClicked, setLastClicked] = useState(null);
+    const clickHandler = (e, i) => {
+        if(e.shiftKey && lastClicked !== null) {
+            const min = lastClicked < i ? lastClicked : i;
+            const max = lastClicked > i ? lastClicked : i;
+            let value = checked[lastClicked];
+            for(let i = min; i < max; i++) {
+                checked[i] = value;
             }
+            checked[i] = value;
+            setChecked(checked);
+        } else {
+            console.log("###")
+            setChecked([
+                ...checked.slice(0, i),
+                !checked[i],
+                ...checked.slice(i + 1)
+            ]);
         }
-        setShiftHeld(false);
-    }, [lastChecked, lastLastChecked])
-
-    let elems = [];
-    for(let i = 0; i < texts.length; i++) {
-        const text = texts[i];
-        elems.push(<Item onClick={(e) => updateTrackers(e, i)} ref={(ref) => setRef(text, ref)} text={text} key={text} />);
+        setLastClicked(i);
     }
-
 
     return <div className="inbox">
-            {elems}
+            {texts.map((e, i) => <Item text={e} checked={checked[i]} onClick={(e) => clickHandler(e, i)} key={e} />)}
            </div>;
 }
 
