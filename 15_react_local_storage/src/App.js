@@ -1,12 +1,8 @@
 import React from 'react'
-import Icon from "./Icon";
-import Wrapper from "./Wrapper";
+import LocalStorage from "./LocalStorage";
 
 function App(props) {
-    return <>
-            <Icon />
-            <Wrapper />
-           </>;
+    return <LocalStorage />;
 }
 
 export default App;
