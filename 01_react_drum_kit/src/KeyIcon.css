@@ -10,12 +10,6 @@ kbd {
     color: #ffc600;
 }
 
-.playing {
-    transform: scale(1.1);
-    border-color: #ffc600;
-    box-shadow: 0 0 1rem #ffc600;
-}
-
 .key {
     border: .4rem solid black;
     border-radius: .5rem;
@@ -28,4 +22,11 @@ kbd {
     color: white;
     background: rgba(0,0,0,0.4);
     text-shadow: 0 0 .5rem black;
+}
+
+/* Must Be After .key to override border-color */
+.playing {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import CSSTransition from "react-transition-group/cjs/CSSTransition";
+import React from 'react'
+import { CSSTransition } from "react-transition-group"
 
 import './KeyIcon.css'
 
