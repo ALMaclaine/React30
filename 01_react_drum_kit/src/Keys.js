@@ -46,17 +46,33 @@ function Keys(props) {
     const setRef = (key, ref) => refs[key.toLowerCase()] = ref;
 
     useEffect(() => {
+        const keysDown = {};
         const downHandler = (e) => {
-            if(refs[e.key]) {
-                refs[e.key].play();
+            keysDown[e.key] = true;
+            for(const key in keysDown) {
+                if(keysDown[key]) {
+                    if(refs[key]) {
+                        const playPromise = refs[key].play();
+                        if(playPromise) {
+                            playPromise.then(() => console.log('Play successful!'))
+                                .catch(() => console.log('Play failed!'))
+                        }
+                    }
+                }
             }
         }
 
+        const upHandler = (e) => {
+            keysDown[e.key] = false;
+        }
+
         window.addEventListener('keydown', downHandler);
+        window.addEventListener('keyup', upHandler);
         return () => {
             window.removeEventListener('keydown', downHandler);
+            window.removeEventListener('keyup', upHandler);
         };
-    }, []);
+    }, [refs]);
 
     return <div className={'keys'}>
         {
