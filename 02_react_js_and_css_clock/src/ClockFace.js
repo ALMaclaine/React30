@@ -36,21 +36,16 @@ function ClockFace(props) {
             setHours(hour);
         }
 
-        let timer;
-        function timeout() {
-            updateLastDate();
-            timer = setTimeout(timeout, updateRate);
-        }
-        timeout();
+        const timer = setInterval(updateLastDate, updateRate);
 
-        return () => clearTimeout(timer);
+        return () => clearInterval(timer);
     }, [firstDate, startTime.seconds, startTime.mins, startTime.milliseconds, startTime.hours, updateRate]);
 
 
     return <div className='clock-face'>
-        <SecondHand seconds={seconds}  />
-        <MinHand seconds={seconds} mins={mins} />
         <HourHand mins={mins} hours={hours} />
+        <MinHand seconds={seconds} mins={mins} />
+        <SecondHand seconds={seconds}  />
     </div>
 }
 
