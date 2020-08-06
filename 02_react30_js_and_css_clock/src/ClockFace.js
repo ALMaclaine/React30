@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './ClockFace.css';
 
 import SecondHand from "./SecondHand";
@@ -8,19 +8,19 @@ import HourHand from "./HourHand";
 function ClockFace(props) {
     const {updateRate} = props;
     const [firstDate] = useState(new Date());
-
-    const startTime = {
+    const startTimeRef = useRef({
         milliseconds: firstDate.getMilliseconds(),
         seconds: firstDate.getSeconds(),
         mins: firstDate.getMinutes(),
         hours: firstDate.getHours(),
-    };
+    })
 
-    const [seconds, setSeconds] = useState(startTime.seconds);
-    const [mins, setMins] = useState(startTime.mins);
-    const [hours, setHours] = useState(startTime.hours);
+    const [seconds, setSeconds] = useState(startTimeRef.current.seconds);
+    const [mins, setMins] = useState(startTimeRef.current.mins);
+    const [hours, setHours] = useState(startTimeRef.current.hours);
 
     useEffect(() => {
+        const startTime = startTimeRef.current;
         let currentDate = firstDate;
         let ellapsedMilliseconds = 0;
 
