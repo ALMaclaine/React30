@@ -1,10 +1,10 @@
 import React from 'react';
-import './Clock.css'
+import './Clock.css';
 import ClockFace from "./ClockFace";
 
 function Clock(props) {
     return <div className='clock'>
-        <ClockFace updateRate={1000} />
+        <ClockFace updateRate={1000}/>
     </div>
 }
 

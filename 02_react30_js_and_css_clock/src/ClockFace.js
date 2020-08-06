@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import './ClockFace.css'
+import './ClockFace.css';
 
 import SecondHand from "./SecondHand";
 import MinHand from "./MinHand";
 import HourHand from "./HourHand";
 
 function ClockFace(props) {
-    const { updateRate } = props;
+    const {updateRate} = props;
     const [firstDate] = useState(new Date());
 
     const startTime = {
@@ -23,6 +23,7 @@ function ClockFace(props) {
     useEffect(() => {
         let currentDate = firstDate;
         let ellapsedMilliseconds = 0;
+
         function updateLastDate() {
             const newDate = new Date();
             const dateDiff = (newDate - currentDate);
@@ -39,13 +40,13 @@ function ClockFace(props) {
         const timer = setInterval(updateLastDate, updateRate);
 
         return () => clearInterval(timer);
-    }, [firstDate, startTime.seconds, startTime.mins, startTime.milliseconds, startTime.hours, updateRate]);
+    }, [firstDate, updateRate]);
 
 
     return <div className='clock-face'>
-        <HourHand mins={mins} hours={hours} />
-        <MinHand seconds={seconds} mins={mins} />
-        <SecondHand seconds={seconds}  />
+        <HourHand mins={mins} hours={hours}/>
+        <MinHand seconds={seconds} mins={mins}/>
+        <SecondHand seconds={seconds}/>
     </div>
 }
 
