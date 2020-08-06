@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Control.css'
+import './Control.css';
 
 function Slider(props) {
     const { min, max, startingValue, name, dataSizing } = props;

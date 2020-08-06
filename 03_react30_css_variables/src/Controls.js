@@ -1,5 +1,5 @@
-import React from 'react'
-import './Controls.css'
+import React from 'react';
+import './Controls.css';
 import Slider from "./Slider";
 import ColorPicker from "./ColorPicker";
 

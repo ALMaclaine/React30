@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Control.css'
+import './Control.css';
 
 function ColorPicker(props) {
     const { startingValue, name } = props;
@@ -13,7 +13,7 @@ function ColorPicker(props) {
 
     return <>
             <label htmlFor={name}>{`${name[0].toUpperCase() + name.slice(1)}:`}</label>
-            <input onChange={handleUpdate} onMouseMove={handleUpdate} type="color" name={name} value={value} style={{ position: "relative", top: "-6px" }} />
+            <input onChange={handleUpdate} onInput={handleUpdate} type="color" name={name} value={value} style={{ position: "relative", top: "-6px" }} />
         </>
 }
 
