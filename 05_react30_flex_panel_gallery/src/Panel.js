@@ -3,6 +3,7 @@ import './Panel.css'
 
 
 function Panel(props) {
+    const {children, className} = props;
     const ref = useRef();
 
     useEffect(() => {
@@ -22,11 +23,11 @@ function Panel(props) {
             current.removeEventListener('click', toggleOpen);
             current.removeEventListener('transitionend', toggleActive);
         }
-    });
+    }, []);
 
-    const className = "panel " + props.className;
-    return <div className={className} ref={ref}>
-        {props.children}
+    const finalClassName = "panel " + className;
+    return <div className={finalClassName} ref={ref}>
+        {children}
     </div>
 }
 
