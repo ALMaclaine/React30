@@ -1,4 +1,5 @@
 import React from 'react';
+import './CssVariables.css';
 import Controls from "./Controls";
 
 function CssVariables(props) {
