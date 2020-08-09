@@ -1,34 +1,27 @@
-import React, {useRef, useEffect} from 'react'
-import './Panel.css'
-
+import React, {useState} from 'react';
+import './Panel.css';
+import {CSSTransition} from "react-transition-group"
 
 function Panel(props) {
     const {children, className} = props;
-    const ref = useRef();
+    const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        const toggleOpen = () => ref.current.classList.toggle('open');
-        const toggleActive = (e) => {
-            if (e.propertyName.includes('flex')) {
-                ref.current.classList.toggle('open-active');
-            }
-        }
-
-        ref.current.addEventListener('click', toggleOpen);
-        ref.current.addEventListener('transitionend', toggleActive);
-
-        const current = ref.current;
-
-        return () => {
-            current.removeEventListener('click', toggleOpen);
-            current.removeEventListener('transitionend', toggleActive);
-        }
-    }, []);
+    const timeout = {
+        appear: 0,
+        enter: 500,
+        exit: 700,
+    };
+    const classNames = {enter: 'open', enterDone: 'open-active', exit: 'close-active'}
 
     const finalClassName = "panel " + className;
-    return <div className={finalClassName} ref={ref}>
-        {children}
-    </div>
+    return <CSSTransition in={open}
+                          timeout={timeout}
+                          classNames={classNames}
+            >
+        <div onClick={() => setOpen(!open)} className={finalClassName}>
+            {children}
+        </div>
+    </CSSTransition>
 }
 
 export default Panel;
