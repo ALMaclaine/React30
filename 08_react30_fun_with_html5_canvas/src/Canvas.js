@@ -25,35 +25,6 @@ function Canvas(props) {
         ctx.lineWidth = 100;
     }, [ctx])
 
-    function draw(ref, e) {
-        const {current} = ref;
-        const {isDrawing, lastX, lastY, hue} = current;
-        if (!isDrawing || !ctx) return; // stop the fn from running when they are not moused down
-        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-        ctx.beginPath();
-        // start from
-        ctx.moveTo(lastX, lastY);
-        // go to
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-        [current.lastX, current.lastY] = [e.offsetX, e.offsetY];
-
-        current.hue++;
-        if (current.hue >= 360) {
-            current.hue = 0;
-        }
-
-        if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
-            current.direction = !current.direction;
-        }
-
-        if (current.direction) {
-            ctx.lineWidth++;
-        } else {
-            ctx.lineWidth--;
-        }
-    }
-
     useEffect(() => {
         const handler = () => {
             setWidth(window.innerWidth);
@@ -69,6 +40,36 @@ function Canvas(props) {
 
     useEffect(() => {
         const {current} = canvasRef;
+
+        function draw(ref, e) {
+            const {current} = ref;
+            const {isDrawing, lastX, lastY, hue} = current;
+            if (!isDrawing || !ctx) return; // stop the fn from running when they are not moused down
+            ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+            ctx.beginPath();
+            // start from
+            ctx.moveTo(lastX, lastY);
+            // go to
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [current.lastX, current.lastY] = [e.offsetX, e.offsetY];
+
+            current.hue++;
+            if (current.hue >= 360) {
+                current.hue = 0;
+            }
+
+            if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+                current.direction = !current.direction;
+            }
+
+            if (current.direction) {
+                ctx.lineWidth++;
+            } else {
+                ctx.lineWidth--;
+            }
+        }
+
         const mouseDownHandler = (e) => {
             canvasValuesRef.current.isDrawing = true;
             [canvasValuesRef.current.lastX, canvasValuesRef.current.lastY] = [e.offsetX, e.offsetY];
