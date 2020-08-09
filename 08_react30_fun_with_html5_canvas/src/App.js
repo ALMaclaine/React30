@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import Canvas from "./Canvas";
 
 function App(props) {
-    return <Canvas />;
+    return <Canvas/>;
 }
 
 export default App;

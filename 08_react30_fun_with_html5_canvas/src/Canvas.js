@@ -18,7 +18,7 @@ function Canvas(props) {
     }, []);
 
     useEffect(() => {
-        if(!ctx) return;
+        if (!ctx) return;
         ctx.strokeStyle = '#BADA55';
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
@@ -26,8 +26,8 @@ function Canvas(props) {
     }, [ctx])
 
     function draw(ref, e) {
-        const { current } = ref;
-        const { isDrawing, lastX, lastY, hue } = current;
+        const {current} = ref;
+        const {isDrawing, lastX, lastY, hue} = current;
         if (!isDrawing || !ctx) return; // stop the fn from running when they are not moused down
         ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
         ctx.beginPath();
@@ -47,7 +47,7 @@ function Canvas(props) {
             current.direction = !current.direction;
         }
 
-        if(current.direction) {
+        if (current.direction) {
             ctx.lineWidth++;
         } else {
             ctx.lineWidth--;
@@ -68,12 +68,12 @@ function Canvas(props) {
     }, []);
 
     useEffect(() => {
-        const { current } = canvasRef;
+        const {current} = canvasRef;
         const mouseDownHandler = (e) => {
             canvasValuesRef.current.isDrawing = true;
             [canvasValuesRef.current.lastX, canvasValuesRef.current.lastY] = [e.offsetX, e.offsetY];
         }
-        current.addEventListener('mousedown',mouseDownHandler);
+        current.addEventListener('mousedown', mouseDownHandler);
 
 
         const drawHandler = (e) => draw(canvasValuesRef, e);
@@ -85,14 +85,14 @@ function Canvas(props) {
         current.addEventListener('mouseout', drawingFalse);
 
         return () => {
-            current.removeEventListener('mousedown',mouseDownHandler);
+            current.removeEventListener('mousedown', mouseDownHandler);
             current.removeEventListener('mousemove', drawHandler);
             current.removeEventListener('mouseup', drawingFalse);
             current.removeEventListener('mouseout', drawingFalse);
         }
     }, [ctx]);
 
-    return <canvas ref={canvasRef} id="draw" width={width} height={height} />;
+    return <canvas ref={canvasRef} id="draw" width={width} height={height}/>;
 }
 
 export default Canvas;
