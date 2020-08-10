@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import './Inbox.css'
+import React, {useState} from 'react';
+import './Inbox.css';
 import Item from "./Item";
 
 const texts = [
