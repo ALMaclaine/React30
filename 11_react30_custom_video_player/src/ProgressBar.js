@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import './ProgressBar.css'
+import React, {useState, useEffect} from 'react';
+import './ProgressBar.css';
 
 function ProgressBar(props) {
     const [mouseDown, setMouseDown] = useState(false);
-    const { playPercent, setTimePercent } = props;
+    const {playPercent, setTimePercent} = props;
     const scrub = (e) => {
         const percent = e.nativeEvent.offsetX / e.currentTarget.offsetWidth;
         setTimePercent(percent);
@@ -12,9 +12,9 @@ function ProgressBar(props) {
     useEffect(() => {
         const progress = document.getElementById('progress');
         const mouseup = () => setMouseDown(false);
-        let counter2 = 0;
+        let rateLimitCounter = 0;
         const windowScrub = (e) => {
-            if(counter2++ % 5 !== 0) return;
+            if (rateLimitCounter++ % 5 !== 0) return;
             const percent = e.offsetX / progress.offsetWidth;
             setTimePercent(percent);
         }
@@ -32,8 +32,8 @@ function ProgressBar(props) {
                 onMouseUp={() => setMouseDown(false)}
                 onClick={scrub}
                 className="progress">
-                <div className="progress__filled" style={{flexBasis: `${playPercent}%`}}
-            />
+        <div className="progress__filled" style={{flexBasis: `${playPercent}%`}}
+        />
     </div>;
 }
 

@@ -1,5 +1,5 @@
 import React, {useRef, useImperativeHandle, forwardRef, useEffect} from 'react';
-import './Player.css'
+import './Player.css';
 
 function VideoPlayer(props, impRef) {
     const { videoSrc, onClick, timeUpdate, volume, playbackRate } = props;

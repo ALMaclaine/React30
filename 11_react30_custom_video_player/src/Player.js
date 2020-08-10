@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import './Player.css'
+import './Player.css';
 import VideoPlayer from "./VideoPlayer";
 import PlayerControls from "./PlayerControls";
 
@@ -11,8 +11,7 @@ function Player(props) {
     const videoRef = useRef();
 
     function togglePlay() {
-        if(!videoRef.current) return;
-        if(videoPlaying) {
+        if (videoPlaying) {
             videoRef.current.pause()
             setVideoPlaying(false);
         } else {
@@ -27,12 +26,10 @@ function Player(props) {
     }
 
     function changeTime(value) {
-        if(!videoRef.current) return;
         videoRef.current.updateTime(value);
     }
 
     function setTimePercent(time) {
-        if(!videoRef.current) return;
         videoRef.current.setTimePercent(time);
     }
 
@@ -45,7 +42,9 @@ function Player(props) {
     }
 
     return <div className="player">
-        <VideoPlayer timeUpdate={onTimeUpdate} onClick={togglePlay} ref={videoRef} volume={volume} playbackRate={playbackRate} videoSrc="652333414.mp4" />
+        <VideoPlayer timeUpdate={onTimeUpdate} onClick={togglePlay} ref={videoRef} volume={volume}
+                     playbackRate={playbackRate} videoSrc="652333414.mp4"
+        />
         <PlayerControls videoPlaying={videoPlaying}
                         playPercent={playPercent}
                         changeTime={changeTime}
