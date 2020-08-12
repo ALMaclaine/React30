@@ -6,7 +6,6 @@ function PlatesController(props) {
     const [plates, setPlates] = useState(JSON.parse(localStorage.getItem('items')) || []);
 
     function addItem(newPlate) {
-        console.log(newPlate);
         const item = {
             text: newPlate,
             done: false
