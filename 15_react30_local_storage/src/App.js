@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import LocalStorage from "./LocalStorage";
 
 function App(props) {
-    return <LocalStorage />;
+    return <LocalStorage/>;
 }
 
 export default App;

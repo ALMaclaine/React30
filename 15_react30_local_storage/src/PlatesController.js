@@ -4,6 +4,7 @@ import AddItems from "./AddItems";
 
 function PlatesController(props) {
     const [plates, setPlates] = useState(JSON.parse(localStorage.getItem('items')) || []);
+
     function addItem(newPlate) {
         console.log(newPlate);
         const item = {
@@ -20,16 +21,14 @@ function PlatesController(props) {
         console.log("???")
         plates[i].done = !plates[i].done
         setPlates([
-            ...plates.slice(0, i),
-            plates[i],
-            ...plates.slice(i + 1)
+            ...plates
         ]);
     }
 
     return <>
-            <Plates markDone={markDone} plates={plates} />
-            <AddItems addItem={addItem} />
-           </>
+        <Plates markDone={markDone} plates={plates}/>
+        <AddItems addItem={addItem}/>
+    </>
 }
 
 export default PlatesController;
