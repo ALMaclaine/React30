@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import Hero from "./Hero";
 
 function App(props) {
-    return <Hero />
+    return <Hero/>
 }
 
 export default App;

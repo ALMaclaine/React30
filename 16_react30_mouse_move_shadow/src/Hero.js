@@ -10,9 +10,9 @@ function Hero(props) {
 
     useEffect(() => {
         function shadow(e) {
-            const { walk } = calcData.current;
-            const { offsetWidth: width, offsetHeight: height } = heroRef.current;
-            let { offsetX: x, offsetY: y } = e;
+            const {walk} = calcData.current;
+            const {offsetWidth: width, offsetHeight: height} = heroRef.current;
+            let {offsetX: x, offsetY: y} = e;
 
             if (this !== e.target) {
                 x = x + e.target.offsetLeft;
@@ -28,6 +28,7 @@ function Hero(props) {
               ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
             `);
         }
+
         window.addEventListener('mousemove', shadow);
 
         return () => {
@@ -36,10 +37,10 @@ function Hero(props) {
     }, []);
 
     return <div ref={heroRef} className="hero">
-            <h1 style={{textShadow: style}} contentEditable={true} suppressContentEditableWarning={true}>
-                <span role="img" aria-label="fire emoji">🔥</span>WOAH!
-            </h1>
-           </div>;
+        <h1 style={{textShadow: style}} contentEditable={true} suppressContentEditableWarning={true}>
+            <span role="img" aria-label="fire emoji">🔥</span>WOAH!
+        </h1>
+    </div>;
 }
 
 export default Hero;
