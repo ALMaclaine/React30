@@ -18,7 +18,6 @@ function PlatesController(props) {
     }
 
     function markDone(i) {
-        console.log("???")
         plates[i].done = !plates[i].done
         setPlates([
             ...plates
