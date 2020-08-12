@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import './SiteWrap.css'
+import React, {useEffect, useState} from 'react';
+import './SiteWrap.css';
 import SlideImageLeft from "./SlideImageLeft";
 import SlideImageRight from "./SlideImageRight";
 
 function debounce(func, wait = 20, immediate = true) {
     let timeout;
-    return function() {
+    return function () {
         const context = this, args = arguments;
-        const later = function() {
+        const later = function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -26,37 +26,38 @@ function SiteWrap(props) {
         function checkSlide() {
             let tmp = [...active];
             refs.forEach((sliderImageRef, i) => {
-                    if(sliderImageRef === null) return;
-                    // half way through the image
-                    const slideInAt = (window.scrollY + window.innerHeight) - sliderImageRef.height / 2;
-                    // bottom of the image
-                    const imageBottom = sliderImageRef.offsetTop + sliderImageRef.height;
-                    const isHalfShown = slideInAt > sliderImageRef.offsetTop;
-                    const isNotScrolledPast = window.scrollY < imageBottom;
-                    if (isHalfShown && isNotScrolledPast) {
-                        tmp = [
-                            ...tmp.slice(0, i),
-                            true,
-                            ...tmp.slice(i + 1)
-                        ]
-                        // sliderImageRef.classList.add('active');
-                    } else {
-                        tmp = [
-                            ...tmp.slice(0, i),
-                            false,
-                            ...tmp.slice(i + 1)
-                        ]
-                    }
+                if (sliderImageRef === null) return;
+                // half way through the image
+                const slideInAt = (window.scrollY + window.innerHeight) - sliderImageRef.height / 2;
+                // bottom of the image
+                const imageBottom = sliderImageRef.offsetTop + sliderImageRef.height;
+                const isHalfShown = slideInAt > sliderImageRef.offsetTop;
+                const isNotScrolledPast = window.scrollY < imageBottom;
+                if (isHalfShown && isNotScrolledPast) {
+                    tmp = [
+                        ...tmp.slice(0, i),
+                        true,
+                        ...tmp.slice(i + 1)
+                    ]
+                    // sliderImageRef.classList.add('active');
+                } else {
+                    tmp = [
+                        ...tmp.slice(0, i),
+                        false,
+                        ...tmp.slice(i + 1)
+                    ]
+                }
             });
             setActive(tmp);
         }
+
         const debounced = debounce(checkSlide);
         window.addEventListener('scroll', debounced);
 
         return () => {
             window.removeEventListener('scroll', debounced);
         }
-    });
+    }, [active, refs]);
 
     return <div className="site-wrap">
         <h1>Slide in on Scroll</h1>
@@ -123,7 +124,8 @@ function SiteWrap(props) {
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio maiores adipisci quibusdam
             repudiandae dolor vero placeat esse sit! Quibusdam saepe aperiam explicabo placeat optio,
             consequuntur nihil voluptatibus expedita quia vero perferendis, deserunt et incidunt
-            eveniet <SlideImageRight ref={ref => refs.push(ref)} src="http://unsplash.it/200/200" active={active[3]}/> temporibus
+            eveniet <SlideImageRight ref={ref => refs.push(ref)} src="http://unsplash.it/200/200"
+                                     active={active[3]}/> temporibus
             doloremque possimus facilis. Possimus labore, officia dolore! Eaque ratione saepe, alias
             harum laboriosam deserunt laudantium blanditiis eum explicabo placeat reiciendis labore iste
             sint. Consectetur expedita dignissimos, non quos distinctio, eos rerum facilis eligendi.
