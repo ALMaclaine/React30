@@ -1,13 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react'
-import './Photobooth.css'
+import React, {useState, useRef, useEffect} from 'react';
+import './Photobooth.css';
 import PhotoViewer from "./PhotoViewer";
 import VideoViewer from "./VideoViewer";
 import Controls from "./Controls";
 import Strip from "./Strip";
 
 function rgbSplit(pixels) {
-    for (let i = 0; i < pixels.data.length; i+=4) {
-        pixels.data[i - 150] = pixels.data[i + 0]; // RED
+    for (let i = 0; i < pixels.data.length; i += 4) {
+        pixels.data[i - 150] = pixels.data[i]; // RED
         pixels.data[i + 500] = pixels.data[i + 1]; // GREEN
         pixels.data[i - 550] = pixels.data[i + 2]; // Blue
     }
@@ -35,7 +35,7 @@ function greenScreen(pixels, levels) {
 }
 
 function redEffect(pixels) {
-    for (let i = 0; i < pixels.data.length; i+=4) {
+    for (let i = 0; i < pixels.data.length; i += 4) {
         pixels.data[i + 0] = pixels.data[i + 0] + 200; // RED
         pixels.data[i + 1] = pixels.data[i + 1] - 50; // GREEN
         pixels.data[i + 2] = pixels.data[i + 2] * 0.5; // Blue
@@ -44,17 +44,16 @@ function redEffect(pixels) {
 }
 
 function initializePhotoContext(video, photo, levels) {
-    const { videoWidth: width, videoHeight: height } = video;
+    const {videoWidth: width, videoHeight: height} = video;
     const ctx = photo.getContext('2d');
     return setInterval(() => {
         ctx.drawImage(video, 0, 0, width, height);
         // take the pixels out
         let pixels = ctx.getImageData(0, 0, width, height);
         // mess with them
-        // pixels = redEffect(pixels);
+        pixels = redEffect(pixels);
 
         pixels = rgbSplit(pixels);
-        // ctx.globalAlpha = 0.8;
 
         pixels = greenScreen(pixels, levels);
         // put them back
@@ -104,11 +103,11 @@ function Photobooth(props) {
     }, [])
 
     return <div className="photobooth">
-        <Controls {...levelsControllers} takePhoto={takePhoto} />
-        <VideoViewer ref={videoRef} />
-        <PhotoViewer ref={photoRef} width={photoWidth} height={photoHeight} />
-        <audio ref={snapRef} src={"snap.mp3"} />
-        <Strip photos={photos} />
+        <Controls {...levelsControllers} takePhoto={takePhoto}/>
+        <VideoViewer ref={videoRef}/>
+        <PhotoViewer ref={photoRef} width={photoWidth} height={photoHeight}/>
+        <audio ref={snapRef} src={"snap.mp3"}/>
+        <Strip photos={photos}/>
     </div>;
 }
 
