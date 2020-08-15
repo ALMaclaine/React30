@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import './Words.css'
+import React, {useEffect, useState} from 'react';
+import './Words.css';
 
 function Words(props) {
     const [words, setWords] = useState([]);
