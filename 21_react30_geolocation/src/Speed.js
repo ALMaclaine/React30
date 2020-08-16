@@ -3,7 +3,7 @@ import './Speed.css'
 
 function Speed(props) {
     const [speed, setSpeed] = useState(0);
-    const { setHeading } = props;
+    const {setHeading} = props;
 
     useEffect(() => {
         const navigatorHandler = (speed, heading) => {

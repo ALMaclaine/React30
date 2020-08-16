@@ -2,7 +2,7 @@ import React from 'react'
 import Compass from "./Compass";
 
 function App(props) {
-    return <Compass />
+    return <Compass/>
 }
 
 export default App;
