@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react'
-import './Highlighter.css'
+import React, {useEffect, useRef} from 'react';
+import './Highlighter.css';
 
 function Highlighter(props) {
     const highlightRef = useRef();
@@ -12,6 +12,7 @@ function Highlighter(props) {
 
     useEffect(() => {
         const triggers = document.querySelectorAll('a');
+
         function highlightLink() {
             const linkCoords = this.getBoundingClientRect();
             console.log(linkCoords);
@@ -25,8 +26,8 @@ function Highlighter(props) {
             highlightRef.current.style.width = `${positionData.current.width}px`;
             highlightRef.current.style.height = `${positionData.current.height}px`;
             highlightRef.current.style.transform = `translate(${positionData.current.left}px, ${positionData.current.top}px)`;
-
         }
+
         triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
 
         return () => {
@@ -34,7 +35,7 @@ function Highlighter(props) {
         }
     }, []);
 
-    return <span className="highlight" ref={highlightRef} />;
+    return <span className="highlight" ref={highlightRef}/>;
 }
 
 export default Highlighter;

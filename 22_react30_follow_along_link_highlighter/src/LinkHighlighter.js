@@ -6,10 +6,10 @@ import Highlighter from "./Highlighter";
 
 function LinkHighlighter(props) {
     return <>
-            <Menu />
-            <Wrapper />
-            <Highlighter />
-        </>;
+        <Menu/>
+        <Wrapper/>
+        <Highlighter/>
+    </>;
 }
 
 export default LinkHighlighter;
