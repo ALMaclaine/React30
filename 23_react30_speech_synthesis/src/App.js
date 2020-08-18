@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import Voiceinator from "./Voiceinator";
 
 function App(props) {
-    return <Voiceinator />;
+    return <Voiceinator/>;
 }
 
 export default App;

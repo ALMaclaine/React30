@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 function Voices(props) {
-    const { voices, changeVoice } = props;
+    const {voices, changeVoice} = props;
     let elem;
-    if(voices && voices.length !== 0) {
+    if (voices && voices.length !== 0) {
         elem = [];
-        for(const voice of voices) {
-            if(!voice.lang.includes('en')) continue;
+        for (const voice of voices) {
+            if (!voice.lang.includes('en')) continue;
             elem.push(<option key={voice.name} value={voice.name}>{voice.name} ({voice.lang})</option>);
         }
     } else {
