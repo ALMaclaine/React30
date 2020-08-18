@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react'
-import './Voiceinator.css'
+import React, {useState, useEffect, useRef} from 'react';
+import './Voiceinator.css';
 import Voices from "./Voices";
 
 const defaultMsg = 'Hello! I love JavaScript 👍';
@@ -26,11 +26,16 @@ function Voiceinator(props) {
 
     useEffect(() => {
         utteranceRef.current.text = defaultMsg;
+
         function populateVoices() {
             setVoices(this.getVoices());
         }
 
         speechSynthesis.addEventListener('voiceschanged', populateVoices);
+
+        return () => {
+            speechSynthesis.removeEventListener('voiceschanged', populateVoices);
+        }
 
     }, []);
     return <div className="voiceinator">
