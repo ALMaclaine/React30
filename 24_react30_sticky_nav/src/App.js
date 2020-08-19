@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import StickyNav from "./StickyNav";
 
 function App(props) {
-    return <StickyNav />;
+    return <StickyNav/>;
 }
 
 export default App;
