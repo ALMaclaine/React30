@@ -20,6 +20,10 @@ function StickyNav(props) {
         }
 
         window.addEventListener('scroll', fixNav);
+
+        return () => {
+            window.removeEventListener('scroll', fixNav);
+        }
     })
 
     return <>
